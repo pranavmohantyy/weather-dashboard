@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
-function SearchBar() {
+function SearchBar({ onWeatherUpdate }) {
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     setLoading(true);
-    // Simulate loading state
-    setTimeout(() => setLoading(false), 2000);
+    const coords = await getCoords(city);
+    const weather = await getWeather(coords[0].latitude, coords[0].longitude);
+    onWeatherUpdate(weather);
+    setLoading(false);
   };
 
   return (
