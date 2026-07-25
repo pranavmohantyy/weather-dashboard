@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import CurrentWeather from './CurrentWeather';
+import './index.css';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -15,7 +16,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Weather Dashboard</h1>
       <SearchBar onWeatherUpdate={handleWeatherUpdate} />
       <button onClick={toggleUnits}>Toggle °C/°F</button>
