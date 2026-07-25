@@ -1,5 +1,6 @@
 import React from 'react';
 import HourlyForecast from './HourlyForecast';
+import WeeklyForecast from './WeeklyForecast';
 
 function CurrentWeather({ data }) {
   const { temperature, feels_like, humidity, windspeed, weathercode } = data.current_weather;
@@ -20,6 +21,7 @@ function CurrentWeather({ data }) {
       <p>Wind: {windspeed} m/s</p>
       <p>Condition: {weatherIcons[weathercode] || '🌈'}</p>
       <HourlyForecast hourly={data.hourly} />
+      <WeeklyForecast weekly={data.daily} />
     </div>
   );
 }
