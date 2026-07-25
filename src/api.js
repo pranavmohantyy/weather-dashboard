@@ -6,6 +6,6 @@ export const getCoords = async (city) => {
 };
 
 export const getWeather = async (lat, lon) => {
-  const response = await fetch(`${API_URL}/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+  const response = await fetch(`${API_URL}/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&air_quality=true`);
   return response.json();
 };

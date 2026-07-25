@@ -9,7 +9,7 @@ function convertTemperature(temp, isCelsius) {
 }
 
 function CurrentWeather({ data, isCelsius }) {
-  const { temperature, feels_like, humidity, windspeed, winddirection, weathercode } = data.current_weather;
+  const { temperature, feels_like, humidity, windspeed, winddirection, weathercode, uv_index, air_quality } = data.current_weather;
   const weatherIcons = {
     0: '☀️',
     1: '🌤️',
@@ -21,12 +21,16 @@ function CurrentWeather({ data, isCelsius }) {
   return (
     <div>
       <h2>Current Weather</h2>
-      <p>Temperature: {convertTemperature(temperature, isCelsius).toFixed(1)}°{isCelsius ? 'C' : 'F'}</p>
-      <p>Feels Like: {convertTemperature(feels_like, isCelsius).toFixed(1)}°{isCelsius ? 'C' : 'F'}</p>
+      <p>{temperature}°{isCelsius ? 'C' : 'F'} - {weatherIcons[weathercode]}</p>
+      <p>Feels like: {convertTemperature(feels_like, isCelsius).toFixed(1)}°{isCelsius ? 'C' : 'F'}</p>
       <p>Humidity: {humidity}%</p>
-      <p>Wind Speed: {windspeed} m/s</p>
+      <p>Wind: {windspeed} {winddirection}°</p>
       <WindDirection degrees={winddirection} />
-      <p>{weatherIcons[weathercode]}</p>
+      {uv_index && <p>UV Index: {uv_index}</p>}
+      {air_quality && <p>Air Quality: {air_quality}</p>}
+      <HourlyForecast hourly={data.hourly} isCelsius={isCelsius} />
+      <WeeklyForecast weekly={data.weekly} isCelsius={isCelsius} />
+      <TemperatureChart hourly={data.hourly} />
     </div>
   );
 }
