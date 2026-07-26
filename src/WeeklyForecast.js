@@ -11,7 +11,7 @@ function WeeklyForecast({ weekly, isCelsius }) {
       {weekly.map((day, index) => (
         <div key={index} style={{ display: 'flex', justifyContent: 'space-between', margin: '5px 0' }}>
           <span>{new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</span>
-          <span>{convertTemperature(day.high, isCelsius).toFixed(1)}°{isCelsius ? 'C' : 'F'} / {convertTemperature(day.low, isCelsius).toFixed(1)}°{isCelsius ? 'C' : 'F'}</span>
+          <span>{convertTemperature(day.high, isCelsius).toFixed(1)}°{isCelsius ? 'C' : 'F'}</span>
         </div>
       ))}
     </div>

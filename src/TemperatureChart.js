@@ -13,7 +13,7 @@ function TemperatureChart({ hourly }) {
         points={hourly.map((hour, index) => `${index * 10},${100 - ((hour.temperature - minTemp) / (maxTemp - minTemp)) * 100}`).join(' ')}
       />
       {hourly.map((hour, index) => (
-        <text key={index} x={index * 10} y="90" fontSize="10" textAnchor="middle">{hour.temperature}°C</text>
+        <text key={index} x={index * 10} y="90" fontSize="10" textAnchor="middle">{hour.temperature.toFixed(1)}°</text>
       ))}
     </svg>
   );

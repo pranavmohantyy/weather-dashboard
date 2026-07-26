@@ -18,34 +18,19 @@ function SearchBar({ onWeatherUpdate }) {
     onWeatherUpdate(weather);
     setLoading(false);
     const updatedCities = [...new Set([city, ...recentCities])].slice(0, 5);
-    localStorage.setItem('recentCities', JSON.stringify(updatedCities));
     setRecentCities(updatedCities);
-  };
-
-  const handleGeolocation = async () => {
-    setLoading(true);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const weather = await getWeather(position.coords.latitude, position.coords.longitude);
-        onWeatherUpdate(weather);
-        setLoading(false);
-      });
-    } else {
-      alert('Geolocation is not supported by this browser.');
-      setLoading(false);
-    }
+    localStorage.setItem('recentCities', JSON.stringify(updatedCities));
   };
 
   return (
     <div>
-      <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Enter city" />
-      <button onClick={handleSearch} disabled={loading}>Search</button>
-      <button onClick={handleGeolocation} disabled={loading}>Use my location</button>
-      <div>
-        {recentCities.map((recentCity, index) => (
-          <button key={index} onClick={() => setCity(recentCity)}>{recentCity}</button>
+      <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Search city" />
+      <button onClick={handleSearch} disabled={loading}>{loading ? 'Loading...' : 'Search'}</button>
+      <ul>
+        {recentCities.map((c, index) => (
+          <li key={index} onClick={() => setCity(c)}>{c}</li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
